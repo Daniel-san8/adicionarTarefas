@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query->bindParam(':nome', $nome);
     $query->execute();
 
-    header('Location: ./index.php');
+    header('Location: ../index.php');
     exit;
 }
 ?>

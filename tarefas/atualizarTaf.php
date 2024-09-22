@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query->bindParam(':id', $id);
     $query->execute();
 
-    header('Location: ./listaTarefas.php');
+    header('Location: ../index.php');
     exit;
 }
 ?>

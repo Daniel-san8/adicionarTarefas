@@ -1,74 +1,60 @@
-<?php
-
-
-
-?>
-
-
-
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Cadastrar</title>
-
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .direita {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-top: 5rem;
-
-            border: 1px solid cadetblue;
-
-            padding: 1rem;
-
-            background-color: gray;
-        }
-
-        input[type='submit'] {
-            margin-top: 1rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-            align-self: center;
-            background-color: burlywood;
-            padding: .5rem;
-
-            margin-top: 1rem;
-        }
-    </style>
+    <title>Controle de Tarefas</title>
 </head>
 <body>
-    <section id="direita">
-    <form action="./cadastrar.php" method="post" class="direita">
-        <h2>Cadastrar Pessoa</h2>
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" required>
+    <h1>Controle de Tarefas</h1>
 
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" required>
+    <h2>Adicionar Categoria</h2>
+    <form method="POST" action="./tarefas/cadastrarCat.php">
+        <label for="nome">Nome da Categoria:</label><br>
+        <input type="text" id="nome" name="nome" required><br>
+        <button type="submit">Adicionar Categoria</button>
+    </form>
 
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" required>
+    <h2>Adicionar Responsável</h2>
+    <form method="POST" action="./tarefas/cadastrarUser.php">
+        <label for="nome">Nome do Responsável:</label><br>
+        <input type="text" id="nome" name="nome" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <button type="submit">Adicionar Responsável</button>
+    </form>
 
-        <input type="submit" value="Cadastrar">
+    <h2>Adicionar Tarefa</h2>
+    <form method="POST" action="./tarefas/cadastrarTaf.php">
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo" required><br>
+        <label for="descricao">Descrição:</label><br>
+        <textarea name="descricao" id="descricao" required></textarea><br>
+        
+        <label for="categoria_id">Categoria:</label><br>
+        <select name="categoria_id" id="categoria_id" required>
+            <?php
+            @require_once('./conexao.php');
+            $categorias = $pdo->query('SELECT * FROM categorias')->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($categorias as $categoria) {
+                echo "<option value=\"{$categoria['id']}\">{$categoria['nome']}</option>";
+            }
+            ?>
+        </select><br>
 
-        <a href="./login.php">Ir para o login</a>
-    </form>  
-    </section>
-    
+        <label for="responsavel_id">Responsável:</label><br>
+        <select name="responsavel_id" id="responsavel_id" required>
+            <?php
+            $responsaveis = $pdo->query('SELECT * FROM responsaveis')->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($responsaveis as $responsavel) {
+                echo "<option value=\"{$responsavel['id']}\">{$responsavel['nome']}</option>";
+            }
+            ?>
+        </select><br>
+
+        <button type="submit">Adicionar Tarefa</button>
+    </form>
+    <h2>Lista de Tarefas</h2>
+    <a href="./tarefas/listaTarefas.php">Ver Tarefas</a>
 </body>
 </html>

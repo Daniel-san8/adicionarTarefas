@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query->bindParam(':email', $email);
     $query->execute();
 
-    header('Location: ./index.php');
+    header('Location: ../index.php');
     exit;
 }
 ?>
