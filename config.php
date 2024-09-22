@@ -4,7 +4,7 @@
 $servidor = 'localhost';
 $usuario = 'root';
 $senha = '';
-$banco = 'projetophp8';
+$banco = 'controle_tarefas';
 
 
 
