@@ -50,3 +50,7 @@ INSERT INTO tarefas (titulo, descricao, categoria_id, responsavel_id) VALUES
 ('Criar Logo', 'Desenvolver o logotipo do projeto', 2, 2),
 ('Campanha de Mídia Social', 'Criar campanhas para redes sociais', 3, 3);
 
+Abra seu cliente de banco de dados (como phpMyAdmin ou MySQL Workbench).
+Crie um novo banco de dados com o nome projeto_tarefas.
+Execute o script de criação para criar as tabelas.
+Execute o script de inserção para adicionar dados iniciais.
