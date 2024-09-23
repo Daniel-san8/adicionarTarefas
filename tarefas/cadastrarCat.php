@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php
 @require_once('../conexao.php');
-// Obter todas as tarefas
+
 $query = $pdo->prepare('SELECT * FROM tarefas');
 $query->execute();
 $tarefas = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -46,7 +46,7 @@ $tarefas = $query->fetchAll(PDO::FETCH_ASSOC);
 
 <h1>Painel de Tarefas</h1>
 
-<!-- Formulário para Adicionar Tarefa -->
+
 <form method="POST" action="../actions/adicionar.php">
     <label for="titulo">Título:</label><br>
     <input type="text" id="titulo" name="titulo" required><br>
@@ -71,7 +71,7 @@ $tarefas = $query->fetchAll(PDO::FETCH_ASSOC);
         <input type="submit">
 </form>
 
-<!-- Tabela de Tarefas -->
+
 <table>
     <thead>
         <tr>
@@ -93,12 +93,12 @@ $tarefas = $query->fetchAll(PDO::FETCH_ASSOC);
             <td><?php echo $tarefa['data_criacao']; ?></td>
             <td><?php echo $tarefa['categoria']; ?></td>
             <td>
-                <!-- Botão de Editar -->
+            
                 <button onclick="document.getElementById('editar-<?php echo $tarefa['id']; ?>').style.display='block'">Editar</button>
-                <!-- Botão de Excluir -->
+         
                 <a href="?excluir=<?php echo $tarefa['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">Excluir</a>
 
-                <!-- Formulário de Edição (oculto por padrão) -->
+
                 <div id="editar-<?php echo $tarefa['id']; ?>" style="display:none;">
                     <form method="POST" action="index.php">
                         <input type="hidden" name="id" value="<?php echo $tarefa['id']; ?>">
